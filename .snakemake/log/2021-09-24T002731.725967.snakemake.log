@@ -1,0 +1,102 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count    min threads    max threads
+--------------  -------  -------------  -------------
+all                   1              1              1
+bcftools_call         1              1              1
+plot_quals            1              1              1
+samtools_index        2              1              1
+samtools_sort         2              1              1
+total                 7              1              1
+
+Select jobs to execute...
+
+[Fri Sep 24 00:27:31 2021]
+rule samtools_sort:
+    input: mapped_reads/B.bam
+    output: sorted_reads/B.bam
+    jobid: 5
+    wildcards: sample=B
+    resources: tmpdir=/var/folders/pj/v0z2h7512pq3n12pjwnq1nxh0000gn/T
+
+[Fri Sep 24 00:27:32 2021]
+Finished job 5.
+1 of 7 steps (14%) done
+Select jobs to execute...
+
+[Fri Sep 24 00:27:32 2021]
+rule samtools_index:
+    input: sorted_reads/B.bam
+    output: sorted_reads/B.bam.bai
+    jobid: 8
+    wildcards: sample=B
+    resources: tmpdir=/var/folders/pj/v0z2h7512pq3n12pjwnq1nxh0000gn/T
+
+[Fri Sep 24 00:27:32 2021]
+Finished job 8.
+2 of 7 steps (29%) done
+Select jobs to execute...
+
+[Fri Sep 24 00:27:32 2021]
+rule samtools_sort:
+    input: mapped_reads/A.bam
+    output: sorted_reads/A.bam
+    jobid: 3
+    wildcards: sample=A
+    resources: tmpdir=/var/folders/pj/v0z2h7512pq3n12pjwnq1nxh0000gn/T
+
+[Fri Sep 24 00:27:32 2021]
+Finished job 3.
+3 of 7 steps (43%) done
+Select jobs to execute...
+
+[Fri Sep 24 00:27:32 2021]
+rule samtools_index:
+    input: sorted_reads/A.bam
+    output: sorted_reads/A.bam.bai
+    jobid: 7
+    wildcards: sample=A
+    resources: tmpdir=/var/folders/pj/v0z2h7512pq3n12pjwnq1nxh0000gn/T
+
+[Fri Sep 24 00:27:32 2021]
+Finished job 7.
+4 of 7 steps (57%) done
+Select jobs to execute...
+
+[Fri Sep 24 00:27:32 2021]
+rule bcftools_call:
+    input: data/genome.fa, sorted_reads/A.bam, sorted_reads/B.bam, sorted_reads/A.bam.bai, sorted_reads/B.bam.bai
+    output: calls/all.vcf
+    jobid: 2
+    resources: tmpdir=/var/folders/pj/v0z2h7512pq3n12pjwnq1nxh0000gn/T
+
+[Fri Sep 24 00:27:33 2021]
+Finished job 2.
+5 of 7 steps (71%) done
+Select jobs to execute...
+
+[Fri Sep 24 00:27:33 2021]
+rule plot_quals:
+    input: calls/all.vcf
+    output: plots/quals.svg
+    jobid: 1
+    resources: tmpdir=/var/folders/pj/v0z2h7512pq3n12pjwnq1nxh0000gn/T
+
+[Fri Sep 24 00:27:39 2021]
+Finished job 1.
+6 of 7 steps (86%) done
+Select jobs to execute...
+
+[Fri Sep 24 00:27:39 2021]
+localrule all:
+    input: plots/quals.svg
+    jobid: 0
+    resources: tmpdir=/var/folders/pj/v0z2h7512pq3n12pjwnq1nxh0000gn/T
+
+[Fri Sep 24 00:27:39 2021]
+Finished job 0.
+7 of 7 steps (100%) done
+Complete log: /Users/andrewpowers/bioinformatics/snakemake/snakemake-tutorial/.snakemake/log/2021-09-24T002731.725967.snakemake.log

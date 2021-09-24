@@ -1,0 +1,51 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count    min threads    max threads
+--------------  -------  -------------  -------------
+all                   1              1              1
+bcftools_call         1              1              1
+bwa_map               1              1              1
+plot_quals            1              1              1
+samtools_index        2              1              1
+samtools_sort         2              1              1
+total                 8              1              1
+
+Select jobs to execute...
+
+[Fri Sep 24 00:27:05 2021]
+rule bwa_map:
+    input: data/genome.fa, data/samples/B.fastq
+    output: mapped_reads/B.bam
+    jobid: 6
+    wildcards: sample=B
+    resources: tmpdir=/var/folders/pj/v0z2h7512pq3n12pjwnq1nxh0000gn/T
+
+[Fri Sep 24 00:27:06 2021]
+Finished job 6.
+1 of 8 steps (12%) done
+Select jobs to execute...
+
+[Fri Sep 24 00:27:06 2021]
+rule samtools_sort:
+    input: mapped_reads/B.bam
+    output: sorted_reads/B.bam
+    jobid: 5
+    wildcards: sample=B
+    resources: tmpdir=/var/folders/pj/v0z2h7512pq3n12pjwnq1nxh0000gn/T
+
+[Fri Sep 24 00:27:06 2021]
+Error in rule samtools_sort:
+    jobid: 5
+    output: sorted_reads/B.bam
+    shell:
+        samtool sort -T sorted_reads/B -O bam mapped_reads/B.bam > sorted_reads/B.bam
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job samtools_sort since they might be corrupted:
+sorted_reads/B.bam
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /Users/andrewpowers/bioinformatics/snakemake/snakemake-tutorial/.snakemake/log/2021-09-24T002658.600794.snakemake.log

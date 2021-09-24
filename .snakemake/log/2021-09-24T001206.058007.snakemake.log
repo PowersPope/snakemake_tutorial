@@ -1,0 +1,3 @@
+WildcardError in line 6 of /Users/andrewpowers/bioinformatics/snakemake/snakemake-tutorial/Snakefile:
+No values given for wildcard 'sample'.
+  File "/Users/andrewpowers/bioinformatics/snakemake/snakemake-tutorial/Snakefile", line 6, in <module>
