@@ -1,0 +1,7 @@
+# Set the samples to be use for the first rule input
+samples:
+    A: data/samples/A.fastq
+    B: data/samples/B.fastq
+    C: data/samples/C.fastq
+
+prior_mutation_rate: 0.001
